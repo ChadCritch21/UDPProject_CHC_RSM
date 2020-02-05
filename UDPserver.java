@@ -20,20 +20,20 @@ public class UDPserver {
 
     public static class Server {
 
-        //initialize socket and input stream 
+        // declares socket and data streams for server
         private Socket socket = null;
         private ServerSocket server = null;
         private DataInputStream in = null;
         private DataOutputStream out = null;
 
-        // constructor with port 
+        // constructor to hold server information
         public Server(int port) {
 
             try {
 
                 int w = 0;
                 String readQuote[] = new String[20];
-                String QuoteFile = "C:\\Users\\chadc\\Documents\\quote.csv";
+                String QuoteFile = "quote.csv";
 
                 // reads quote file and stores into an array
                 try { 
@@ -51,19 +51,20 @@ public class UDPserver {
                     System.out.println(e);
                 }
 
-                /*
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-                LocalDateTime now = LocalDateTime.now();
-                System.out.println(dtf.format(now));
-                        */
                 
-                // creates a server socket to wait for client requests
+                LocalDateTime day = LocalDateTime.now();
+                DateTimeFormatter form = DateTimeFormatter.ofPattern("MMMM dd, yyyy.");
+                String f2 = day.format(form);
+                
+                DateTimeFormatter tim = DateTimeFormatter.ofPattern("hh:mma");
+                String f3 = tim.format(day);
+                        
+                
+                // creates a socket for requests
                 server = new ServerSocket(port);
                 
                 // prints process of server connection to the screen
-                System.out.println("Server Started at...."+ "\n");
-
-                System.out.println("Waiting for a client ..." + "\n");
+                System.out.println("Server Started at " + f3 + " on " + f2 + "\n");
 
                 socket = server.accept();
                 System.out.println("Client Accepted"+"\n");
@@ -74,10 +75,10 @@ public class UDPserver {
 
                 // sends quotes from the server to the client
                 out = new DataOutputStream(socket.getOutputStream());
-
+                
                 String line = "";
 
-                // reads message from client until "Over" is sent 
+                // prompts user for input until "END" is entered
                 while (!line.equals("END")) {
                     try {
                         line = in.readUTF();
@@ -85,6 +86,7 @@ public class UDPserver {
                         if (line.equals("REQUESTQUOTE")) {
                             int randQuote = ThreadLocalRandom.current().nextInt(0, 19 + 1);
                             out.writeUTF(readQuote[randQuote]);
+                            System.out.println("Request received from");
                         }
 
                     } catch (IOException i) {
@@ -105,7 +107,8 @@ public class UDPserver {
     public static void main(String[] args) {
 
         // creates a server object with the port number
-        Server server = new Server(5000);
-
+        Server server = new Server(2010);
     }
 }
+                  
+               
