@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This file will serve as our UDP client which will request quotes from the UDP server.
+ * UDP Programming Project
+ * CS415 - Data Communication and Data Networks
+ * Spring 2020
+ * @version 1.0
  */
 package udpclient;
 
@@ -35,6 +37,7 @@ public class UDPclient {
                 // sends output to the socket 
                 out = new DataOutputStream(socket.getOutputStream());
 
+                // fetches data to be returned
                 in = new DataInputStream(
                         new BufferedInputStream(socket.getInputStream()));
 
@@ -50,13 +53,15 @@ public class UDPclient {
 
             // keep reading until "END" is input 
             while (!line.equals("END")) {
+                // takes command and writes string to outputstream
                 try {
                     System.out.print("Enter a command: ");
                     line = input.readLine();
                     out.writeUTF(line);
 
                     System.out.println();
-
+                    
+                    // receives data back (quote) and prints this to the screen
                     quote = in.readUTF();
                     System.out.println(quote + "\n");
 
@@ -71,9 +76,11 @@ public class UDPclient {
 
     public static void main(String[] args) {
 
+        // declares variables to store arguements from the command line
         String ipAdrs = (args[0]);
         int port = Integer.parseInt(args[1]);
         
+        // creates a Client object to be used for Socket
         Client client = new Client(ipAdrs, port);
     }
 }
