@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This file will serve as our UDP server that is used to receive requests from clients and send quotes.
+ * UDP Programming Project
+ * CS415 - Data Communication and Data Networks
+ * Spring 2020
+ * @version 1.0
  */
 package udpserver;
 
@@ -33,7 +35,8 @@ public class UDPserver {
                 String readQuote[] = new String[20];
                 String QuoteFile = "C:\\Users\\chadc\\Documents\\quote.csv";
 
-                try {//reading patient data into the program
+                // reads quote file and stores into an array
+                try { 
                     FileReader inputFile = new FileReader(QuoteFile);
                     BufferedReader bufferReader = new BufferedReader(inputFile);
                     String fileLine;
@@ -54,7 +57,10 @@ public class UDPserver {
                 System.out.println(dtf.format(now));
                         */
                 
+                // creates a server socket to wait for client requests
                 server = new ServerSocket(port);
+                
+                // prints process of server connection to the screen
                 System.out.println("Server Started at...."+ "\n");
 
                 System.out.println("Waiting for a client ..." + "\n");
@@ -66,6 +72,7 @@ public class UDPserver {
                 in = new DataInputStream(
                         new BufferedInputStream(socket.getInputStream()));
 
+                // sends quotes from the server to the client
                 out = new DataOutputStream(socket.getOutputStream());
 
                 String line = "";
@@ -97,6 +104,7 @@ public class UDPserver {
 
     public static void main(String[] args) {
 
+        // creates a server object with the port number
         Server server = new Server(5000);
 
     }
