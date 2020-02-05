@@ -18,7 +18,7 @@ public class UDPclient {
 
     public static class Client {
 
-        // initialize socket and input output streams 
+        // declares socket and required data streams for use 
         private Socket socket = null;
         private DataInputStream input = null;
         private DataInputStream in = null;
@@ -26,7 +26,8 @@ public class UDPclient {
 
         // constructor to put ip address and port 
         public Client(String address, int port) {
-            // establish a connection 
+            
+            // tries to create a connection through socket 
             try {
                 socket = new Socket(address, port);
                 System.out.println("Client Connected" + "\n");
@@ -47,7 +48,7 @@ public class UDPclient {
                 System.out.println(i);
             }
 
-            // string to read message from input 
+            // strings to store commands
             String line = "";
             String quote = "";
 
