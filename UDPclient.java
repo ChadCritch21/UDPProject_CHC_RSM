@@ -18,7 +18,7 @@ public class UDPclient {
 
     public static class Client {
 
-        // declares socket and required data streams for use 
+        // initialize socket and input output streams 
         private Socket socket = null;
         private DataInputStream input = null;
         private DataInputStream in = null;
@@ -26,12 +26,10 @@ public class UDPclient {
 
         // constructor to put ip address and port 
         public Client(String address, int port) {
-            
-            // tries to create a connection through socket 
+            // establish a connection 
             try {
                 socket = new Socket(address, port);
-                System.out.println("Client Connected" + "\n");
-
+               
                 // takes input from terminal 
                 input = new DataInputStream(System.in);
 
@@ -48,9 +46,10 @@ public class UDPclient {
                 System.out.println(i);
             }
 
-            // strings to store commands
+            // string to read message from input 
             String line = "";
             String quote = "";
+           
 
             // keep reading until "END" is input 
             while (!line.equals("END")) {
@@ -58,16 +57,28 @@ public class UDPclient {
                 try {
                     System.out.print("Enter a command: ");
                     line = input.readLine();
+                    
+                    if (line.equals("REQUESTQUOTE")){
+                   
                     out.writeUTF(line);
-
+                    
+                    InetAddress localhost = InetAddress.getLocalHost();
+                    out.writeUTF(localhost.toString().replaceAll("[A-Z,a-z,/,-]", ""));
+                            
                     System.out.println();
                     
                     // receives data back (quote) and prints this to the screen
                     quote = in.readUTF();
                     System.out.println(quote + "\n");
-
+                    
+                    }
+                    
+                    else if (!line.equals("END") && !line.equals("REQUESTQUOTE")) {
+                        System.out.println("\n"+"Invalid request... Please enter "+"<REQUESTQUOTE>"+" to receive a random quote or <END> to end the program."+"\n");
+                    }
+                    
                 } catch (IOException i) {
-                    System.out.println("Client Closed");
+                    System.out.println("\n"+"Client Closed");
                 }
             }
 
