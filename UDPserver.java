@@ -67,8 +67,7 @@ public class UDPserver {
                 System.out.println("Server Started at " + f3 + " on " + f2 + "\n");
 
                 socket = server.accept();
-                System.out.println("Client Accepted"+"\n");
-
+              
                 // takes input from the client socket 
                 in = new DataInputStream(
                         new BufferedInputStream(socket.getInputStream()));
@@ -77,7 +76,8 @@ public class UDPserver {
                 out = new DataOutputStream(socket.getOutputStream());
                 
                 String line = "";
-
+                String ip = "";
+                
                 // prompts user for input until "END" is entered
                 while (!line.equals("END")) {
                     try {
@@ -86,11 +86,14 @@ public class UDPserver {
                         if (line.equals("REQUESTQUOTE")) {
                             int randQuote = ThreadLocalRandom.current().nextInt(0, 19 + 1);
                             out.writeUTF(readQuote[randQuote]);
-                            System.out.println("Request received from");
+                            
+                            ip = in.readUTF();
+                            System.out.println("Request received from "+ip+"\n");
                         }
 
                     } catch (IOException i) {
-                        System.out.println(i);
+                        System.out.println("\n"+"Client ended session");
+                        break;
                     }
                 }
 
@@ -98,7 +101,7 @@ public class UDPserver {
                 socket.close();
                 in.close();
             } catch (IOException i) {
-                System.out.println("Closing Connection");
+                System.out.println("\n"+"Closing Connection");
             }
         }
 
@@ -107,8 +110,6 @@ public class UDPserver {
     public static void main(String[] args) {
 
         // creates a server object with the port number
-        Server server = new Server(2010);
+        Server server = new Server(5000);
     }
 }
-                  
-               
