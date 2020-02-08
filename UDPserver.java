@@ -58,8 +58,10 @@ public class UDPserver {
                 
                 DateTimeFormatter tim = DateTimeFormatter.ofPattern("hh:mma");
                 String f3 = tim.format(day);
-                        
                 
+                DateTimeFormatter fullDate = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                String f4 = day.format(fullDate);
+                                
                 // creates a socket for requests
                 server = new ServerSocket(port);
                 
@@ -77,6 +79,7 @@ public class UDPserver {
                 
                 String line = "";
                 String ip = "";
+                String portNum = "";
                 
                 // prompts user for input until "END" is entered
                 while (!line.equals("END")) {
@@ -88,7 +91,10 @@ public class UDPserver {
                             out.writeUTF(readQuote[randQuote]);
                             
                             ip = in.readUTF();
-                            System.out.println("Request received from "+ip+"\n");
+                            
+                            portNum = in.readUTF();
+                           
+                            System.out.println("Request received from "+ip+": "+portNum+" "+f4+" "+f3+"\n");
                         }
 
                     } catch (IOException i) {
