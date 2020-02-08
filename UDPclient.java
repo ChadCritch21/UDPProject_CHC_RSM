@@ -1,7 +1,7 @@
 /*
  * This file will serve as our UDP client which will request quotes from the UDP server.
  * UDP Programming Project
- * CS415 - Data Communication and Data Networks
+ * CS415 - Data Communication and Data Networks.
  * Spring 2020
  * @version 1.0
  */
