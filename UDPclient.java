@@ -5,7 +5,6 @@
  * Spring 2020
  * @version 1.0
  */
-package udpclient;
 
 import java.io.*;
 import java.net.*;
