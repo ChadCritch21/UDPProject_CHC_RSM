@@ -49,8 +49,7 @@ public class UDPclient {
             // string to read message from input 
             String line = "";
             String quote = "";
-           
-
+          
             // keep reading until "END" is input 
             while (!line.equals("END")) {
                 // takes command and writes string to outputstream
@@ -64,7 +63,12 @@ public class UDPclient {
                     
                     InetAddress localhost = InetAddress.getLocalHost();
                     out.writeUTF(localhost.toString().replaceAll("[A-Z,a-z,/,-]", ""));
-                            
+                    
+                    int portNum = socket.getLocalPort();
+                    out.writeUTF(Integer.toString(portNum));
+                    
+                    out.writeUTF(quote);
+                          
                     System.out.println();
                     
                     // receives data back (quote) and prints this to the screen
