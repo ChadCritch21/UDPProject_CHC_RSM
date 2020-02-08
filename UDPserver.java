@@ -5,7 +5,6 @@
  * Spring 2020
  * @version 1.0
  */
-package udpserver;
 
 import java.io.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -116,6 +115,6 @@ public class UDPserver {
     public static void main(String[] args) {
 
         // creates a server object with the port number
-        Server server = new Server(5000);
+        Server server = new Server(2010);
     }
 }
