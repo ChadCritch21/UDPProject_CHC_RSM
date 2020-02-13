@@ -17,7 +17,7 @@ Tasks Completed:
 1. Ryan 
   - Completed client application to receive messages from server
   - Assisted with commenting out java files for clarity
-  - Completed formatting for date and time for server class
+  - Completed formatting for date and time for server application
   - Helped with adding IP address from client accessing the server to show in message
   - Formatted README.md file to include proper information 
   
