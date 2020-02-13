@@ -50,14 +50,16 @@ public class UDPserver {
                     System.out.println(e);
                 }
 
-                
+                // finds the local day and time the server is started
                 LocalDateTime day = LocalDateTime.now();
                 DateTimeFormatter form = DateTimeFormatter.ofPattern("MMMM dd, yyyy.");
                 String f2 = day.format(form);
                 
+                // formats the time to desired output
                 DateTimeFormatter tim = DateTimeFormatter.ofPattern("hh:mma");
                 String f3 = tim.format(day);
                 
+                // formats the day to the desired output
                 DateTimeFormatter fullDate = DateTimeFormatter.ofPattern("MM/dd/yyyy");
                 String f4 = day.format(fullDate);
                                 
@@ -76,6 +78,7 @@ public class UDPserver {
                 // sends quotes from the server to the client
                 out = new DataOutputStream(socket.getOutputStream());
                 
+                // declares String variables to hold values
                 String line = "";
                 String ip = "";
                 String portNum = "";
@@ -84,13 +87,16 @@ public class UDPserver {
                 while (!line.equals("END")) {
                     try {
                         line = in.readUTF();
-
+        
+                        // sends a random quote to client if 'REQUESTQUOTE' is entered
                         if (line.equals("REQUESTQUOTE")) {
                             int randQuote = ThreadLocalRandom.current().nextInt(0, 19 + 1);
                             out.writeUTF(readQuote[randQuote]);
                             
+                            // places IP from client in variable
                             ip = in.readUTF();
                             
+                            // places port number from client in variable
                             portNum = in.readUTF();
                            
                             System.out.println("Request received from "+ip+": "+portNum+" "+f4+" "+f3+"\n");
