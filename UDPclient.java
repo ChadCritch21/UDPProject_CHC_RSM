@@ -60,9 +60,11 @@ public class UDPclient {
                    
                     out.writeUTF(line);
                     
+                    // collects IP address from client accessing server
                     InetAddress localhost = InetAddress.getLocalHost();
                     out.writeUTF(localhost.toString().replaceAll("[A-Z,a-z,/,-]", ""));
                     
+                    // collects port number from client accessing server
                     int portNum = socket.getLocalPort();
                     out.writeUTF(Integer.toString(portNum));
                     
@@ -75,7 +77,7 @@ public class UDPclient {
                     System.out.println(quote + "\n");
                     
                     }
-                    
+                    // prints invalid request if command is not recognized
                     else if (!line.equals("END") && !line.equals("REQUESTQUOTE")) {
                         System.out.println("\n"+"Invalid request... Please enter "+"<REQUESTQUOTE>"+" to receive a random quote or <END> to end the program."+"\n");
                     }
