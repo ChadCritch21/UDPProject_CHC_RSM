@@ -33,12 +33,11 @@ Instructions:
 
 1. With both UDP server and client applications cloned, begin by opening the UDPserver application and running this upon compilation
    - Once the repository is cloned, the quotes.csv file should be included in the UDPProject_CHC_RSM directory
-2. Once the UDP server is running and client application has been compiled, the UDP client application will be ran using the 
-following command prompt with two arguements, the IP Address of the server and port number: java UDPclient 10.101.1.1 2010
+2. Once the UDP server is running and UDPclient application has been compiled, the UDP client application will be ran using
+the following command prompt with two arguements, the IP Address of the server and port number: java UDPclient 10.101.1.1 2010
 3. Upon starting the UDP client, the command line will prompt to enter a command
 4. Type "REQUESTQUOTE" to send a request to the UDP server to fetch a random quote, or "END" to stop the application
-5. Once "REQUESTQUOTE" is typed, the UDP client should display the random quote, along with an additional prompt to enter a
-command
+5. Once "REQUESTQUOTE" is typed, the UDP client should display the random quote, along with an additional prompt to enter a command
 6. The UDP server will then prompt a request was received and include information about the client 
 7. After this, as many quotes can be requested as desired until "END" is entered to close the connection through the UDP 
 client application
