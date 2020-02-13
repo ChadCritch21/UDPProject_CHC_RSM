@@ -98,7 +98,7 @@ public class UDPserver {
                             
                             // places port number from client in variable
                             portNum = in.readUTF();
-                           
+                            // prints out a request has been received from the clients IP Address and port number with the formatted date/time
                             System.out.println("Request received from "+ip+": "+portNum+" "+f4+" "+f3+"\n");
                         }
 
